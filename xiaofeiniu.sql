@@ -292,4 +292,3 @@ INSERT INTO xfn_order_detail VALUES
 (NULL, '4', '2', '丁丁', '100023'),
 (NULL, '8', '1', '当当', '100024'),
 (NULL, '29', '3', '豆豆', '100025');
-qushenmemingzi
