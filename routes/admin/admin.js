@@ -16,7 +16,7 @@ module.exports = router;
 router.get('/login/:aname/:apwd', (req, res)=>{
   var aname = req.params.aname;
   var apwd = req.params.apwd;
-  //需要对用户输入的密码执行加密函数
+  //需要对用户输入的密码执行加密函数，因为存的时候就是加密的
   pool.query('SELECT aid FROM xfn_admin WHERE aname=? AND apwd=PASSWORD(?)', [aname, apwd], (err, result)=>{
     if(err)throw err;
     if(result.length>0){   //查询到一行数据，登录成功
@@ -28,7 +28,7 @@ router.get('/login/:aname/:apwd', (req, res)=>{
 })
 
 /*  
-*API:  PATCH /admin         //修改部分数据用PATCH
+*API:  PATCH /admin         //修改部分数据用PATCH -- 幂等    put 把这行都修改了 -- 幂等
 *请求数据：{aname: 'xxx', oldPwd: 'xxx', newPwd:'xxx'}
 *根据管理员名和密码修改管理员密码
 *返回数据：

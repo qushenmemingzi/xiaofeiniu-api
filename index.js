@@ -7,7 +7,10 @@ const express = require("express");
 const cors = require("cors")
 const bodyParser = require("body-parser")
 const categoryRouter = require("./routes/admin/category")
+const adminRouter = require('./routes/admin/admin')
+const dish = require('./routes/admin/dish')
 //启动主服务器   可以npm start  也可以 node ./index.js
+const settings = require('./routes/admin/settings')
 const app = express();
 app.listen(PORT,()=>{
   console.log('Server Listening '+PORT+' ...')
@@ -25,3 +28,6 @@ app.use(bodyParser.json())
 
 //挂载路由器
 app.use('/admin/category',categoryRouter)
+app.use('/admin',adminRouter)
+app.use('/admin/dish',dish)
+app.use('/admin/settings',settings)
