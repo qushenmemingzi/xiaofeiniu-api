@@ -37,7 +37,6 @@
     bt3.onclick = function(){
       //向服务器发送JSON类型的请求数据
       var data = {cname: '恐龙类'};
-      //会自动将data转成json发给服务器
       axios.post('http://127.0.0.1:8090/admin/category', data).then((result)=>{
         console.log('添加新的类别成功')
         console.log(result.data);
@@ -48,7 +47,7 @@
 
     bt4.onclick = function(){
       //向服务器发送JSON类型的请求数据
-      var data = {cid: 6, cname: '史前类'};
+      var data = {cid: 60, cname: '恐龙类'};
       axios.put('http://127.0.0.1:8090/admin/category', data).then((result)=>{
         console.log('类别修改成功')
         console.log(result.data);
