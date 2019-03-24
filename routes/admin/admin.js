@@ -16,12 +16,14 @@ module.exports = router;
 router.get('/login/:aname/:apwd', (req, res)=>{
   var aname = req.params.aname;
   var apwd = req.params.apwd;
+  console.log(aname,apwd)
   //需要对用户输入的密码执行加密函数，因为存的时候就是加密的
   pool.query('SELECT aid FROM xfn_admin WHERE aname=? AND apwd=PASSWORD(?)', [aname, apwd], (err, result)=>{
     if(err)throw err;
+	console.log(result)
     if(result.length>0){   //查询到一行数据，登录成功
       res.send({code:200, msg:'login succ'})
-    }else {   //没有查询到数据
+    }else{   //没有查询到数据
       res.send({code:400, msg:'aname or apwd err'})
     }
   });

@@ -16,8 +16,7 @@ module.exports = router;
 router.get('/', (req, res) => {
   pool.query('SELECT * FROM xfn_category ORDER BY cid', (err, result) => {
     if (err) throw err;
-    var jsonData = JSON.stringify(result);
-    res.send('doData(' + jsonData + ')');
+    res.send(result);
   })
 })
 
@@ -59,7 +58,7 @@ router.post('/', (req, res) => {
   var data = req.body;   //形如{cname: 'xxx', }
   pool.query('INSERT INTO xfn_category SET ?', data, (err, result) => {  //注意此处SQL语句的简写
     if (err) throw err;
-    res.send({ code: 200, msg: '1 category added' });
+    res.send({ code: 200, msg: '1 category added',cid:result.insertId});
   })
 })
 
@@ -72,7 +71,7 @@ router.post('/', (req, res) => {
 *  {code: 400, msg: '0 category modified, not exists' }
 *  {code: 401, msg: '0 category modified, no modification' }
 */
-router.put('/', (req, res) => {
+router.put('/:cid', (req, res) => {
   var data = req.body; //请求数据{cid:xx, cname:'xx'}
   //TODO: 此处可以对数据数据进行验证
   pool.query('UPDATE xfn_category SET ? WHERE cid=?', [data, data.cid], (err, result) => {
